@@ -43,8 +43,8 @@ const PLACEMENTS = {
   home: [
     // B1 — top motif: sits just under the nav, near-stationary, cut off
     // at the top of the bio panel. lag doubled from 0.04 for 2x movement.
-    { src: '/designs/hero/kolam-cross.webp',       anchor: '#hero', at: 0, offset: 76,
-      x: 50, w: 34, depth: 0.72, lag: 0.08, rot: 0, grow: 0.03, out: 0, clipAbove: '#bio' },
+    { src: '/designs/hero/kolam-cross.webp',       anchor: '#hero', at: 0.5, offset: -300,
+      x: 50, w: 34, depth: 0.72, lag: 0.56, rot: 0, grow: 0.3, out: 0, clipAbove: '#bio' },
 
     // B3 — at the very top of the bio section, parallax movement doubled
     // (lag 0.88 -> 0.76 halves how closely it tracks the page)
@@ -58,7 +58,7 @@ const PLACEMENTS = {
     // B4 — 250px lower, parallax speed reduced 25%
     // (deviation above page speed 0.14 -> 0.105)
     { src: '/designs/work/lattice-field.webp',     anchor: '#work', at: 0.34, offset: 340,
-      x: 89, w: 16, depth: 0.90, lag: 0.895, rot: 21, rotStart: -10.5, grow: 0.05, out: 0 },
+      x: 89, w: 16, depth: 0.90, lag: 0.895, rot: 40, rotStart: -20, grow: 0.05, out: 0 },
 
 
     // B5 — behind the LEFT of the enquiry form, reading through the glass.

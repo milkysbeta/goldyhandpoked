@@ -12,7 +12,7 @@
   --milky-red:#D8342B;
 
   --glass-bg:rgba(240,234,214,.12);   /* one value, every panel */
-  --glass-blur:14.4px;         /* relaxed 20% from 18px */
+  --glass-blur:7.2px;          /* half of 14.4px */
   --hairline:rgba(43,43,43,.14);
 
   --grid-gap:3px;              /* Instagram-tight */
@@ -203,7 +203,7 @@ body.is-leaving{opacity:0}
 .bio__media img{
   position:absolute;top:-60px;left:0;
   width:100%;height:calc(100% + 120px);
-  object-fit:cover;object-position:center;
+  object-fit:cover;object-position:center bottom;
   opacity:1;
 }
 .bio__text{padding:clamp(26px,3.4vw,52px);max-width:52ch;align-self:center}
