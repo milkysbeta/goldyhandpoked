@@ -16,7 +16,7 @@
 const BASE = import.meta.env.BASE_URL;
 const rebase = (p) => BASE + String(p).replace(/^\//, '');
 
-const FIRST = 16;
+const FIRST = 24;   // 6 rows at 4 columns
 const STEP = 8;
 
 let items = [];
