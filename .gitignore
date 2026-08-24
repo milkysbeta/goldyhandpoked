@@ -21,3 +21,6 @@ instagram-raw/
 
 # large working source files (already exported into public/)
 unsorted images/*.psd
+
+# scratch / source working folder (outputs live in public/)
+unsorted images/
