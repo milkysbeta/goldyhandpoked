@@ -1,0 +1,23 @@
+# dependencies
+node_modules
+
+# build cache
+.vite
+
+# OS
+.DS_Store
+Thumbs.db
+*.local
+
+# --- secrets: never commit to a public repo ---
+ig-session
+*.session
+cookies*.txt
+*cookies*.sqlite
+
+# instaloader scrape dumps (processed into public/work instead)
+goldy_handpoked/
+instagram-raw/
+
+# large working source files (already exported into public/)
+unsorted images/*.psd

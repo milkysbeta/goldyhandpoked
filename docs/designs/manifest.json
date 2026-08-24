@@ -1,0 +1,44 @@
+[
+  {
+    "src": "/designs/hero/kolam-cross.webp",
+    "section": "hero",
+    "w": 980,
+    "h": 1010
+  },
+  {
+    "src": "/designs/work/endless-knot.webp",
+    "section": "work",
+    "w": 900,
+    "h": 891
+  },
+  {
+    "src": "/designs/bio/diamond-knot.webp",
+    "section": "bio",
+    "w": 800,
+    "h": 960
+  },
+  {
+    "src": "/designs/work/lattice-field.webp",
+    "section": "work",
+    "w": 900,
+    "h": 898
+  },
+  {
+    "src": "/designs/bio/flame.webp",
+    "section": "bio",
+    "w": 620,
+    "h": 1292
+  },
+  {
+    "src": "/designs/enquiry/dotted-diamond.webp",
+    "section": "enquiry",
+    "w": 560,
+    "h": 1205
+  },
+  {
+    "src": "/designs/enquiry/flame-tonal.webp",
+    "section": "enquiry",
+    "w": 620,
+    "h": 1155
+  }
+]

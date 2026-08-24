@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Goldy Handpoked — Hand poked tattoos, Wanaka</title>
+<meta name="description" content="Hand poked tattoos by Goldy. Flash and custom work, made slowly by hand in Hawea Flat, Wanaka, New Zealand." />
+<meta property="og:title" content="Goldy Handpoked" />
+<meta property="og:description" content="Hand poked tattoos, made slowly by hand. Hawea Flat, Wanaka." />
+<meta property="og:type" content="website" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
+<link rel="preload" href="/fonts/Warren.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/WorldChampionship-Regular.woff2" as="font" type="font/woff2" crossorigin />
+  <script type="module" crossorigin src="/assets/main-CsekYdUK.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-Bdj7NUUW.css">
+</head>
+<body data-page="home">
+
+<div class="loader" id="loader">
+  <div class="loader__inner">
+    <img class="loader__mark" src="/logo/goldy-mark.png"
+         srcset="/logo/goldy-mark.png 1x, /logo/goldy-mark@2x.png 2x" alt="" />
+    <span class="loader__word">Goldy Handpoked</span>
+  </div>
+</div>
+
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="designs" id="designs" aria-hidden="true"></div>
+<div class="designs" id="designsClip" aria-hidden="true"></div>
+<canvas class="grain" id="grain" aria-hidden="true"></canvas>
+
+<header class="nav" id="nav">
+  <a class="nav__brand" href="/">
+    <span class="nav__word">Goldy<span>Handpoked</span></span>
+  </a>
+  <img class="nav__line" src="/ui/gold-line.webp" alt="" aria-hidden="true" />
+  <a class="nav__badge" href="/" aria-label="Goldy Handpoked, home">
+    <img src="/logo/goldy-mark.png"
+         srcset="/logo/goldy-mark.png 1x, /logo/goldy-mark@2x.png 2x" alt="" />
+  </a>
+  <nav class="nav__links">
+    <a href="#work">Work</a>
+    <a href="#bio">Bio</a>
+    <a href="#enquiry">Enquiry</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero" id="hero">
+    <h1 class="hero__title" data-depth="0.11">Goldy<em>Handpoked</em></h1>
+    <p class="hero__sub" data-depth="0.15">Hand poked tattoos &middot; Hawea Flat, Wanaka</p>
+  </section>
+
+  <section class="bio glass" id="bio">
+    <div class="bio__media">
+      <img src="/bio/goldy-portrait.jpg" alt="Goldy at work" data-depth="-0.05" />
+    </div>
+    <img class="bio__mark" src="/logo/goldy-mark.png"
+         srcset="/logo/goldy-mark.png 1x, /logo/goldy-mark@2x.png 2x" alt="" aria-hidden="true" />
+    <div class="bio__text">
+      <h2>About</h2>
+      <p>Goldy has been tattooing for seventeen years, and hand poking for the last of them. Every piece is made without a machine — needle, ink, and time.</p>
+      <p>She works from a quiet studio in Hawea Flat, just outside Wanaka, taking a small number of clients so that each sitting stays unhurried.</p>
+      <p>Flash and custom designs are both welcome. Bring an idea, or choose something already drawn.</p>
+      <p class="bio__placeholder">[ placeholder copy — to be replaced with Goldy's own words ]</p>
+    </div>
+  </section>
+
+  <section class="work glass" id="work">
+    <h2 class="section__title" data-depth="0.09">Work</h2>
+    <div class="grid" id="grid" role="list"></div>
+    <button class="more" id="more" type="button">Load more</button>
+  </section>
+
+  <section class="enquiry" id="enquiry" data-depth="0.04">
+<header class="enquiry__head">
+    <h1>Enquiry</h1>
+    <p>Tell Goldy a little about what you have in mind. She reads every message herself, so replies take a few days — never longer than a week.</p>
+  </header>
+
+  <form class="form glass" id="form" novalidate>
+    <!-- honeypot: real people never see or fill this -->
+    <div class="hp" aria-hidden="true">
+      <label for="website">Website</label>
+      <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+    </div>
+    <input type="hidden" name="_started" id="_started" />
+
+    <div class="field">
+      <label for="name">Name <span class="req">*</span></label>
+      <input type="text" id="name" name="name" required autocomplete="name" />
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="email">Email <span class="req">*</span></label>
+        <input type="email" id="email" name="email" required autocomplete="email" inputmode="email" />
+      </div>
+      <div class="field">
+        <label for="phone">Phone <span class="opt">optional</span></label>
+        <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+64" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="enquiryType">Flash or custom? <span class="req">*</span></label>
+      <select id="enquiryType" name="enquiry" required>
+        <option value="">Choose one</option>
+        <option>Flash — something already drawn</option>
+        <option>Custom — my own idea</option>
+        <option>Not sure yet</option>
+      </select>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="placement">Placement on body <span class="opt">optional</span></label>
+        <input type="text" id="placement" name="placement" placeholder="forearm, ankle, ribs…" />
+      </div>
+      <div class="field">
+        <label for="size">Size of tattoo <span class="opt">optional</span></label>
+        <input type="text" id="size" name="size" placeholder="roughly, in cm" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="design">Brief description of the design <span class="opt">optional</span></label>
+      <textarea id="design" name="design" rows="5" placeholder="An idea, a feeling, a reference — whatever you have."></textarea>
+    </div>
+
+    <div class="field">
+      <label for="heard">How did you hear about Goldy? <span class="opt">optional</span></label>
+      <input type="text" id="heard" name="heard" placeholder="Instagram, a friend, walked past…" />
+    </div>
+
+    <button class="submit" type="submit" id="submit">Send enquiry</button>
+    <p class="form__note" id="formNote" role="status" aria-live="polite"></p>
+  </form>
+
+  <section class="enquiry__success glass" id="success" hidden>
+    <h2>Thank you</h2>
+    <p>Your enquiry is on its way to Goldy. Please expect a reply in your email — and feel free to send through any reference images once she gets back to you.</p>
+    <a href="#work">Back to the work</a>
+  </section>
+
+  <aside class="disclaimer glass">
+    <h2>Before you send</h2>
+    <p>Goldy tattoos by hand, one client at a time, so dates fill up slowly and gently. A small deposit holds your booking and comes off the final price.</p>
+    <p>You'll need to be 18 or over, and well rested and fed on the day. If you're unwell, pregnant, or on blood thinners, let her know beforehand and she'll talk it through with you.</p>
+    <p>Designs are drawn for you and stay Goldy's own artwork. Aftercare notes come home with you on the day.</p>
+    <p class="disclaimer__meta">The details you send here are used only to answer your enquiry, and aren't shared with anyone else.</p>
+  </aside>
+  </section>
+
+</main>
+
+<footer class="footer glass">
+  <div class="footer__inner">
+  <div class="footer__left">
+    <p>Hand poked tattoos &middot; Hawea Flat, Wanaka, New Zealand</p>
+    <a href="https://www.instagram.com/goldy_handpoked/" target="_blank" rel="noopener">@goldy_handpoked</a>
+  </div>
+  <a class="milky" href="#" aria-label="Designed by Milky Design">
+    <span class="milky__mark">
+      <img src="/milky/milky-red.png" alt="" loading="lazy" />
+    </span>
+    <span class="milky__label">Designed by Milky Design &middot; <span id="year"></span></span>
+  </a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Tattoo detail" hidden>
+  <div class="lightbox__stage glass">
+    <button class="lightbox__close" id="lbClose" type="button" aria-label="Close">&times;</button>
+    <figure class="lightbox__figure">
+      <img id="lbImg" src="" alt="" />
+    </figure>
+    <figcaption class="lightbox__meta" id="lbMeta"></figcaption>
+  </div>
+</div>
+
+</body>
+</html>

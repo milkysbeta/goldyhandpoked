@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "updated": "2026-08-24",
+  "items": [
+    {
+      "id": "piece-01",
+      "thumb": "/work/thumb/piece-01.jpg",
+      "full": "/work/full/piece-01.jpg",
+      "alt": "Hand poked tattoo by Goldy",
+      "caption": "Fine line florals, healed six weeks.",
+      "type": "work",
+      "hidden": false,
+      "order": 0,
+      "source": "placeholder"
+    },
+    {
+      "id": "piece-02",
+      "thumb": "/work/thumb/piece-02.jpg",
+      "full": "/work/full/piece-02.jpg",
+      "alt": "Hand poked tattoo by Goldy",
+      "caption": "Dotwork sun \u2014 three sittings, all by hand.",
+      "type": "work",
+      "hidden": false,
+      "order": 1,
+      "source": "placeholder"
+    },
+    {
+      "id": "piece-03",
+      "thumb": "/work/thumb/piece-03.jpg",
+      "full": "/work/full/piece-03.jpg",
+      "alt": "Hand poked tattoo by Goldy",
+      "caption": "Small moon phases along the forearm.",
+      "type": "work",
+      "hidden": false,
+      "order": 2,
+      "source": "placeholder"
+    },
+    {
+      "id": "piece-04",
+      "thumb": "/work/thumb/piece-04.jpg",
+      "full": "/work/full/piece-04.jpg",
+      "alt": "Hand poked tattoo by Goldy",
+      "caption": "Botanical piece, single needle.",
+      "type": "work",
+      "hidden": false,
+      "order": 3,
+      "source": "placeholder"
+    },
+    {
+      "id": "piece-05",
+      "thumb": "/work/thumb/piece-05.jpg",
+      "full": "/work/full/piece-05.jpg",
+      "alt": "Hand poked tattoo by Goldy",
+      "caption": "Hand poked mandala for Anna.",
+      "type": "work",
+      "hidden": false,
+      "order": 4,
+      "source": "placeholder"
+    },
+    {
+      "id": "piece-06",
+      "thumb": "/work/thumb/piece-06.jpg",
+      "full": "/work/full/piece-06.jpg",
+      "alt": "Hand poked tattoo by Goldy",
+      "caption": "Linework wave, Hawea Flat.",
+      "type": "work",
+      "hidden": false,
+      "order": 5,
+      "source": "placeholder"
+    },
+    {
+      "id": "piece-07",
+      "thumb": "/work/thumb/piece-07.jpg",
+      "full": "/work/full/piece-07.jpg",
+      "alt": "Hand poked tattoo by Goldy",
+      "caption": "Stick and poke script.",
+      "type": "work",
+      "hidden": false,
+      "order": 6,
+      "source": "placeholder"
+    },
+    {
+      "id": "piece-08",
+      "thumb": "/work/thumb/piece-08.jpg",
+      "full": "/work/full/piece-08.jpg",
+      "alt": "Hand poked tattoo by Goldy",
+      "caption": "Dotted crescent, first tattoo.",
+      "type": "work",
+      "hidden": false,
+      "order": 7,
+      "source": "placeholder"
+    },
+    {
+      "id": "piece-09",
+      "thumb": "/work/thumb/piece-09.jpg",
+      "full": "/work/full/piece-09.jpg",
+      "alt": "Hand poked tattoo by Goldy",
+      "caption": "Fern study \u2014 Aotearoa native.",
+      "type": "work",
+      "hidden": false,
+      "order": 8,
+      "source": "placeholder"
+    },
+    {
+      "id": "piece-10",
+      "thumb": "/work/thumb/piece-10.jpg",
+      "full": "/work/full/piece-10.jpg",
+      "alt": "Hand poked tattoo by Goldy",
+      "caption": "Geometric eye, shaded by hand.",
+      "type": "work",
+      "hidden": false,
+      "order": 9,
+      "source": "placeholder"
+    },
+    {
+      "id": "piece-11",
+      "thumb": "/work/thumb/piece-11.jpg",
+      "full": "/work/full/piece-11.jpg",
+      "alt": "Hand poked tattoo by Goldy",
+      "caption": "Delicate stems around the ankle.",
+      "type": "work",
+      "hidden": false,
+      "order": 10,
+      "source": "placeholder"
+    },
+    {
+      "id": "piece-12",
+      "thumb": "/work/thumb/piece-12.jpg",
+      "full": "/work/full/piece-12.jpg",
+      "alt": "Hand poked tattoo by Goldy",
+      "caption": "Sun and stars, matching pair.",
+      "type": "work",
+      "hidden": false,
+      "order": 11,
+      "source": "placeholder"
+    },
+    {
+      "id": "piece-13",
+      "thumb": "/work/thumb/piece-13.jpg",
+      "full": "/work/full/piece-13.jpg",
+      "alt": "Hand poked tattoo by Goldy",
+      "caption": "Mountain line, Wanaka skyline.",
+      "type": "work",
+      "hidden": false,
+      "order": 12,
+      "source": "placeholder"
+    },
+    {
+      "id": "piece-14",
+      "thumb": "/work/thumb/piece-14.jpg",
+      "full": "/work/full/piece-14.jpg",
+      "alt": "Hand poked tattoo by Goldy",
+      "caption": "Snake in fine line.",
+      "type": "work",
+      "hidden": false,
+      "order": 13,
+      "source": "placeholder"
+    },
+    {
+      "id": "piece-15",
+      "thumb": "/work/thumb/piece-15.jpg",
+      "full": "/work/full/piece-15.jpg",
+      "alt": "Hand poked tattoo by Goldy",
+      "caption": "Constellation freckles.",
+      "type": "work",
+      "hidden": false,
+      "order": 14,
+      "source": "placeholder"
+    },
+    {
+      "id": "piece-16",
+      "thumb": "/work/thumb/piece-16.jpg",
+      "full": "/work/full/piece-16.jpg",
+      "alt": "Hand poked tattoo by Goldy",
+      "caption": "Ornamental band, hand poked.",
+      "type": "work",
+      "hidden": false,
+      "order": 15,
+      "source": "placeholder"
+    }
+  ]
+}
