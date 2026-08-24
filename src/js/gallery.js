@@ -10,6 +10,12 @@
    - arrow keys step through pieces; no visible controls, by design
 --------------------------------------------------------------- */
 
+// Prefix for the deploy path — '/goldyhandpoked/' in production, '/'
+// in dev and under a custom domain. work.json stores root-absolute
+// paths, so we rebase them here.
+const BASE = import.meta.env.BASE_URL;
+const rebase = (p) => BASE + String(p).replace(/^\//, '');
+
 const FIRST = 16;
 const STEP = 8;
 
@@ -27,7 +33,7 @@ function warm(url) {
   warmed.add(url);
   const img = new Image();
   img.decoding = 'async';
-  img.src = url;
+  img.src = rebase(url);
 }
 
 function warmAhead() {
@@ -63,7 +69,7 @@ function render(from, to) {
     if (it.video) btn.dataset.video = '';
 
     const img = document.createElement('img');
-    img.src = it.thumb;
+    img.src = rebase(it.thumb);
     img.alt = it.alt || 'Hand poked tattoo by Goldy';
     img.loading = from === 0 && i < 8 ? 'eager' : 'lazy';
     img.decoding = 'async';
@@ -93,7 +99,7 @@ function open(i) {
   const it = items[i];
   if (!it) return;
 
-  lbImg.src = it.full || it.thumb;
+  lbImg.src = rebase(it.full || it.thumb);
   lbImg.alt = it.alt || 'Hand poked tattoo by Goldy';
   lbMeta.textContent = it.caption || '';
   lbMeta.style.display = it.caption ? '' : 'none';
@@ -139,7 +145,7 @@ export async function initGallery() {
   lbClose = document.getElementById('lbClose');
   if (!gridEl) return;
 
-  const res = await fetch('/data/work.json', { cache: 'no-cache' });
+  const res = await fetch(rebase('data/work.json'), { cache: 'no-cache' });
   const data = await res.json();
 
   items = (data.items || [])

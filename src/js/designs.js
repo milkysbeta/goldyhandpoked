@@ -114,7 +114,7 @@ export function initDesigns(container, clipContainer) {
   nodes = set.map((p) => {
     const img = document.createElement('img');
     img.className = 'design';
-    img.src = p.src;
+    img.src = import.meta.env.BASE_URL + p.src.replace(/^\//, '');
     img.alt = '';
     img.setAttribute('aria-hidden', 'true');
     img.draggable = false;
