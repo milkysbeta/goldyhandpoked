@@ -57,13 +57,16 @@ const PLACEMENTS = {
 
     // B4 — 250px lower, parallax speed reduced 25%
     // (deviation above page speed 0.14 -> 0.105)
-    { src: '/designs/work/lattice-field.webp',     anchor: '#work', at: 0.34, offset: 250,
-      x: 89, w: 24, depth: 0.90, lag: 1.105, rot: 0, grow: 0.05, out: 0 },
+    { src: '/designs/work/lattice-field.webp',     anchor: '#work', at: 0.34, offset: 340,
+      x: 89, w: 16, depth: 0.90, lag: 0.895, rot: 21, rotStart: -10.5, grow: 0.05, out: 0 },
 
 
-    // B5 — behind and to the left of the enquiry form
-    { src: '/designs/bio/flame.webp',              anchor: '#enquiry', at: 0.22, offset: 0,
-      x: 10, w: 14, depth: 0.50, lag: 0.55, rot: 0, grow: 0, out: 0 },
+    // B5 — behind the LEFT of the enquiry form, reading through the glass.
+    // lag MUST be 1.0 here: any less and the parallax slides it away from
+    // the form as you scroll (at 0.62 it ended up ~450px below it). op
+    // overrides the faint global opacity so it actually shows.
+    { src: '/designs/bio/flame.webp',              anchor: '.form', at: 0.5, offset: -600,
+      x: 11, h: 360, depth: 0.14, rot: 0, grow: 0, out: 0, op: 0.55, pshift: 0.35 },
 
     // B6 — no rotation, moved up the page
     { src: '/designs/enquiry/dotted-diamond.webp', anchor: '#enquiry', at: 0, offset: -340,
@@ -85,7 +88,10 @@ let clipLayers = [];
 let lastScroll = 0;
 
 function style(n) {
-  n.el.style.opacity = String(DESIGNS.opacity * (1.25 - n.depth * 0.5));
+  // `op` overrides the global-derived opacity for a motif that needs
+  // to read strongly (e.g. behind a glass panel).
+  const o = n.op ?? DESIGNS.opacity * (1.25 - n.depth * 0.5);
+  n.el.style.opacity = String(o);
   n.el.style.filter = `blur(${(DESIGNS.maxBlur * n.depth).toFixed(2)}px)`;
 }
 
@@ -121,7 +127,12 @@ export function initDesigns(container, clipContainer) {
     img.fetchPriority = 'low';
     img.decoding = 'async';
     img.style.left = `${p.x}%`;
-    img.style.width = `${p.w}vw`;
+    if (p.h) {
+      img.style.height = `${p.h}px`;
+      img.style.width = 'auto';
+    } else {
+      img.style.width = `${p.w}vw`;
+    }
 
     const host = (p.clip || p.clipAbove) && clipContainer ? clipContainer : container;
     host.appendChild(img);
@@ -163,13 +174,27 @@ export function updateDesigns(scrollY) {
   const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
   const progress = Math.min(1, Math.max(0, scrollY / max));
 
+  const vhalf = window.innerHeight / 2;
   for (const n of nodes) {
-    const y = n.yPx - scrollY * (n.lag ?? 1);
+    let y;
+    if (n.pshift != null) {
+      // parallax measured against the viewport centre, like the DOM
+      // layers — the offset is bounded by the viewport, so a deep
+      // motif parallaxes in place instead of sliding away.
+      const baseY = n.yPx - scrollY;
+      const dist = baseY + (n.el.offsetHeight || 0) / 2 - vhalf;
+      y = baseY - dist * n.pshift;
+    } else {
+      y = n.yPx - scrollY * (n.lag ?? 1);
+    }
 
     // slide away from whichever edge the motif already sits nearest
     const outward = (n.out || 0) * progress * (n.x < 50 ? -1 : 1);
 
-    const angle = (n.rot || 0) * progress;
+    // rotStart is the angle at the top of the page; rot is added across
+    // the scroll. A negative rotStart means it begins anti-clockwise and
+    // turns back through square as you scroll.
+    const angle = (n.rotStart || 0) + (n.rot || 0) * progress;
     const scale = 1 + (n.grow || 0) * progress;
 
     n.el.style.transform =

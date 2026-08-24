@@ -11,8 +11,8 @@
   --eggshell:#F0EAD6;
   --milky-red:#D8342B;
 
-  --glass-bg:rgba(240,234,214,.625);  /* one value, every panel */
-  --glass-blur:18px;
+  --glass-bg:rgba(240,234,214,.12);   /* one value, every panel */
+  --glass-blur:14.4px;         /* relaxed 20% from 18px */
   --hairline:rgba(43,43,43,.14);
 
   --grid-gap:3px;              /* Instagram-tight */
@@ -330,7 +330,7 @@ body.is-leaving{opacity:0}
 .milky:hover{opacity:1}
 /* One artwork, desaturated. Keeps the mark's own tonal detail — a flat
    charcoal silhouette loses it — and returns to full red on hover. */
-.milky__mark{position:relative;display:block;width:26px;aspect-ratio:300/470}
+.milky__mark{position:relative;display:block;width:44px;aspect-ratio:300/470}
 .milky__mark img{
   position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
   filter:grayscale(1) contrast(.92) brightness(.72);

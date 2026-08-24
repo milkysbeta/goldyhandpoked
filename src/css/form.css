@@ -22,13 +22,13 @@
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,22px)}
 
 label{
-  font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.62;
+  font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;opacity:.7;
 }
 .req{color:var(--milky-red);opacity:.85;margin-left:.2em}
 .opt{opacity:.45;margin-left:.3em;letter-spacing:.14em}
 
 input,select,textarea{
-  font:inherit;font-weight:500;font-size:15px;
+  font:inherit;font-weight:500;font-size:17px;
   color:var(--charcoal);
   background:rgba(240,234,214,.42);
   border:1px solid var(--hairline);border-radius:2px;

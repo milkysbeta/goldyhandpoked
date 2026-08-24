@@ -162,7 +162,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 /* Live tuning handle. The /admin panel drives the site through this, and
    it is how you dial values by eye from the console:
 
-     __goldy.GRAIN.density = 0.06; __goldy.refreshGrain()
+     __goldy.GRAIN.opacity = 0.15; __goldy.refreshGrain()
      __goldy.MIST.opacity  = 0.03; __goldy.applyMist()
      __goldy.DESIGNS.opacity = 0.5; __goldy.applyDesigns()          */
 window.__goldy = { GRAIN, refreshGrain, MIST, applyMist, DESIGNS, applyDesigns, lenis };
