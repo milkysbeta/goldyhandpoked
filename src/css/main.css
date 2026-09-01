@@ -11,7 +11,8 @@
   --eggshell:#F0EAD6;
   --milky-red:#D8342B;
 
-  --glass-bg:rgba(240,234,214,.12);   /* one value, every panel */
+  --glass-bg:rgba(240,234,214,.09);   /* eggshell wash, a touch more transparent */
+  --glass-grey:rgba(72,70,66,.12);    /* slight grey cast layered on top */
   --glass-blur:7.2px;          /* half of 14.4px */
   --hairline:rgba(43,43,43,.14);
 
@@ -65,6 +66,7 @@ img,.grid__item{-webkit-user-drag:none;user-select:none;-webkit-touch-callout:no
 .designs{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
 .design{
   position:absolute;top:0;
+  max-width:none;               /* motifs may exceed the viewport width */
   transform:translate3d(-50%,0,0);
   will-change:transform;
 }
@@ -80,10 +82,21 @@ body.is-leaving{opacity:0}
   transition:opacity .9s var(--ease),visibility .9s;
 }
 .loader.is-done{opacity:0;visibility:hidden}
-.loader__inner{display:grid;justify-items:center;gap:22px;animation:breathe 3.2s ease-in-out infinite}
-.loader__mark{width:78px;opacity:.9}
-.loader__word{font-family:"World Championship",serif;font-size:15px;letter-spacing:.34em;text-transform:uppercase;opacity:.6}
-@keyframes breathe{0%,100%{opacity:.55}50%{opacity:1}}
+.loader__inner{display:grid;justify-items:center;gap:22px}
+/* canvas (poked dots) and the crisp logo stack in the same box; once the
+   poking finishes the dots crossfade to the finished mark */
+.loader__mark{position:relative;width:150px;height:150px}
+.loader__canvas{position:absolute;inset:0;width:150px;height:150px;display:block;transition:opacity .5s var(--ease)}
+.loader__logo{position:absolute;inset:0;width:150px;height:150px;object-fit:contain;opacity:0;transition:opacity .5s var(--ease)}
+.loader.is-formed .loader__canvas{opacity:0}
+.loader.is-formed .loader__logo{opacity:1}
+/* the wordmark holds back while the logo is poked in, then fades up */
+.loader__word{
+  font-family:"World Championship",serif;font-size:15px;
+  letter-spacing:.34em;text-transform:uppercase;
+  opacity:0;transition:opacity .8s var(--ease);
+}
+.loader.is-formed .loader__word{opacity:.6}
 
 /* --- nav ------------------------------------------------------ */
 .nav{
@@ -223,7 +236,7 @@ body.is-leaving{opacity:0}
 
 /* --- glass panels --------------------------------------------- */
 .glass{
-  background:var(--glass-bg);
+  background:linear-gradient(var(--glass-grey),var(--glass-grey)),var(--glass-bg);
   backdrop-filter:blur(var(--glass-blur)) saturate(1.08);
   -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(1.08);
 }
@@ -234,11 +247,13 @@ body.is-leaving{opacity:0}
 .work{
   position:relative;z-index:3;width:var(--panel);
   margin:0 auto clamp(70px,12vh,150px);
-  padding:0;overflow:hidden;
 }
+/* the glass hugs the title + grid only; images run flush to its bottom
+   edge, and the Load more button sits outside, below the panel */
+.work__panel{position:relative;overflow:hidden;border-radius:3px}
 .section__title{
   font-family:"World Championship",serif;font-weight:400;
-  font-size:clamp(1.4rem,3vw,2.2rem);letter-spacing:.04em;
+  font-size:clamp(1.7rem,3.6vw,2.7rem);letter-spacing:.04em;
   margin:0;
   padding:clamp(24px,3vw,42px) clamp(24px,3vw,42px) clamp(16px,2vw,26px);
 }
@@ -319,6 +334,8 @@ body.is-leaving{opacity:0}
   position:relative;z-index:3;
   padding:clamp(24px,3vw,38px) 0;
 }
+/* footer keeps the plain eggshell wash — no grey cast, just transparency + blur */
+.footer.glass{background:var(--glass-bg)}
 .footer__inner{
   width:var(--panel);margin:0 auto;
   display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;
@@ -354,6 +371,28 @@ body.is-leaving{opacity:0}
 @media (max-width:620px){
   .grid{grid-template-columns:repeat(2,1fr)}
   .nav__links{gap:16px}
+}
+
+/* --- phone: tighten the whole layout ------------------------- */
+@media (max-width:560px){
+  :root{
+    --pad:16px;              /* tighter gutter */
+    --grid-gap:2px;
+    --nav-h:50px;
+    --badge:46px;
+    --badge-top:16px;
+  }
+  /* less air between sections */
+  .bio{margin:clamp(40px,9vh,80px) auto}
+  .work{margin:0 auto clamp(40px,8vh,80px)}
+  .bio__text{padding:20px}
+  .work .section__title{padding:18px 18px 12px}
+  .hero__title{font-size:clamp(2.8rem,17vw,5rem)}
+  .hero__sub{font-size:11px;letter-spacing:.24em}
+  .footer{padding:22px 0}
+  .footer__inner{gap:16px}
+  .nav__word{font-size:14px;letter-spacing:.16em}
+  .nav__links a{font-size:12px;letter-spacing:.14em}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;transition-duration:.01ms!important}

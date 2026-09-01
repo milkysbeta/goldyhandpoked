@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Goldy Handpoked — Hand poked tattoos, Wanaka</title>
+<title>Goldy Handpoked · Hand poked tattoos, Wanaka</title>
 <meta name="description" content="Hand poked tattoos by Goldy. Flash and custom work, made slowly by hand in Hawea Flat, Wanaka, New Zealand." />
 <meta property="og:title" content="Goldy Handpoked" />
 <meta property="og:description" content="Hand poked tattoos, made slowly by hand. Hawea Flat, Wanaka." />
@@ -12,16 +12,19 @@
 <link rel="icon" type="image/png" href="/goldyhandpoked/favicon.png" />
 <link rel="apple-touch-icon" href="/goldyhandpoked/favicon.png" />
 <link rel="preload" href="/goldyhandpoked/fonts/Warren.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="/goldyhandpoked/fonts/WorldChampionship-Regular.woff2" as="font" type="font/woff2" crossorigin />
-  <script type="module" crossorigin src="/goldyhandpoked/assets/main-CeQ-DQEN.js"></script>
-  <link rel="stylesheet" crossorigin href="/goldyhandpoked/assets/main-Ipb7oRvX.css">
+<link rel="preload" href="/goldyhandpoked/fonts/WorldChampionship-Regular.woff2" as="font" type="font/woff2" crossorigin />
+  <script type="module" crossorigin src="/goldyhandpoked/assets/main-YYu1ew-w.js"></script>
+  <link rel="stylesheet" crossorigin href="/goldyhandpoked/assets/main-Cv3ucmF5.css">
 </head>
 <body data-page="home">
 
 <div class="loader" id="loader">
   <div class="loader__inner">
-    <img class="loader__mark" src="/goldyhandpoked/logo/goldy-mark.png"
-         srcset="/goldyhandpoked/logo/goldy-mark.png 1x, /goldyhandpoked/logo/goldy-mark@2x.png 2x" alt="" />
+    <div class="loader__mark">
+      <canvas class="loader__canvas" width="150" height="150" aria-label="Goldy Handpoked"></canvas>
+      <img class="loader__logo" src="/goldyhandpoked/logo/goldy-mark.png"
+           srcset="/goldyhandpoked/logo/goldy-mark.png 1x, /goldyhandpoked/logo/goldy-mark@2x.png 2x" alt="" />
+    </div>
     <span class="loader__word">Goldy Handpoked</span>
   </div>
 </div>
@@ -62,26 +65,29 @@
          srcset="/goldyhandpoked/logo/goldy-mark.png 1x, /goldyhandpoked/logo/goldy-mark@2x.png 2x" alt="" aria-hidden="true" />
     <div class="bio__text">
       <h2>About</h2>
-      <p>Goldy has been tattooing for seventeen years, and hand poking for the last of them. Every piece is made without a machine — needle, ink, and time.</p>
+      <p>Goldy has been tattooing for seventeen years, and hand poking for the last of them. Every piece is made without a machine, just needle, ink, and time.</p>
       <p>She works from a quiet studio in Hawea Flat, just outside Wanaka, taking a small number of clients so that each sitting stays unhurried.</p>
       <p>Flash and custom designs are both welcome. Bring an idea, or choose something already drawn.</p>
-      <p class="bio__placeholder">[ placeholder copy — to be replaced with Goldy's own words ]</p>
+      <p class="bio__placeholder">[ placeholder copy, to be replaced with Goldy's own words ]</p>
     </div>
   </section>
 
-  <section class="work glass" id="work">
-    <h2 class="section__title" data-depth="0.09">Work</h2>
-    <div class="grid" id="grid" role="list"></div>
+  <section class="work" id="work">
+    <div class="work__panel glass">
+      <h2 class="section__title" data-depth="0.09" data-axis="x">Work</h2>
+      <div class="grid" id="grid" role="list"></div>
+    </div>
     <button class="more" id="more" type="button">Load more</button>
   </section>
 
   <section class="enquiry" id="enquiry" data-depth="0.04">
+  <div class="enquiry__panel glass">
 <header class="enquiry__head">
     <h1>Enquiry</h1>
-    <p>Tell Goldy a little about what you have in mind. She reads every message herself, so replies take a few days — never longer than a week.</p>
+    <p>Tell Goldy a little about what you have in mind. She reads every message herself, so replies take a few days, never longer than a week.</p>
   </header>
 
-  <form class="form glass" id="form" novalidate>
+  <form class="form" id="form" novalidate>
     <!-- honeypot: real people never see or fill this -->
     <div class="hp" aria-hidden="true">
       <label for="website">Website</label>
@@ -109,8 +115,8 @@
       <label for="enquiryType">Flash or custom? <span class="req">*</span></label>
       <select id="enquiryType" name="enquiry" required>
         <option value="">Choose one</option>
-        <option>Flash — something already drawn</option>
-        <option>Custom — my own idea</option>
+        <option>Flash, something already drawn</option>
+        <option>Custom, my own idea</option>
         <option>Not sure yet</option>
       </select>
     </div>
@@ -128,7 +134,7 @@
 
     <div class="field">
       <label for="design">Brief description of the design <span class="opt">optional</span></label>
-      <textarea id="design" name="design" rows="5" placeholder="An idea, a feeling, a reference — whatever you have."></textarea>
+      <textarea id="design" name="design" rows="5" placeholder="An idea, a feeling, a reference, whatever you have."></textarea>
     </div>
 
     <div class="field">
@@ -140,19 +146,22 @@
     <p class="form__note" id="formNote" role="status" aria-live="polite"></p>
   </form>
 
-  <section class="enquiry__success glass" id="success" hidden>
+  <img class="enquiry__flame" id="enquiryFlame" src="/goldyhandpoked/designs/bio/flame.webp" alt="" aria-hidden="true" draggable="false" />
+
+  <section class="enquiry__success" id="success" hidden>
     <h2>Thank you</h2>
-    <p>Your enquiry is on its way to Goldy. Please expect a reply in your email — and feel free to send through any reference images once she gets back to you.</p>
+    <p>Your enquiry is on its way to Goldy. Please expect a reply in your email, and feel free to send through any reference images once she gets back to you.</p>
     <a href="#work">Back to the work</a>
   </section>
 
-  <aside class="disclaimer glass">
+  <aside class="disclaimer">
     <h2>Before you send</h2>
     <p>Goldy tattoos by hand, one client at a time, so dates fill up slowly and gently. A small deposit holds your booking and comes off the final price.</p>
     <p>You'll need to be 18 or over, and well rested and fed on the day. If you're unwell, pregnant, or on blood thinners, let her know beforehand and she'll talk it through with you.</p>
     <p>Designs are drawn for you and stay Goldy's own artwork. Aftercare notes come home with you on the day.</p>
     <p class="disclaimer__meta">The details you send here are used only to answer your enquiry, and aren't shared with anyone else.</p>
   </aside>
+  </div>
   </section>
 
 </main>
@@ -181,6 +190,6 @@
     <figcaption class="lightbox__meta" id="lbMeta"></figcaption>
   </div>
 </div>
-
+
 </body>
 </html>

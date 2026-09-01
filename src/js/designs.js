@@ -44,7 +44,7 @@ const PLACEMENTS = {
     // B1 — top motif: sits just under the nav, near-stationary, cut off
     // at the top of the bio panel. lag doubled from 0.04 for 2x movement.
     { src: '/designs/hero/kolam-cross.webp',       anchor: '#hero', at: 0.5, offset: -300,
-      x: 50, w: 34, depth: 0.72, lag: 0.56, rot: 0, grow: 0.3, out: 0, clipAbove: '#bio' },
+      x: 50, matchWidth: '.hero__sub', matchScale: 1, w: 34, offsetM: -170, depth: 0.72, lag: 0.56, rot: 0, grow: 0.3, out: 0, clipAbove: '#bio' },
 
     // B3 — at the very top of the bio section, parallax movement doubled
     // (lag 0.88 -> 0.76 halves how closely it tracks the page)
@@ -61,12 +61,12 @@ const PLACEMENTS = {
       x: 89, w: 16, depth: 0.90, lag: 0.895, rot: 40, rotStart: -20, grow: 0.05, out: 0 },
 
 
-    // B5 — behind the LEFT of the enquiry form, reading through the glass.
-    // lag MUST be 1.0 here: any less and the parallax slides it away from
-    // the form as you scroll (at 0.62 it ended up ~450px below it). op
-    // overrides the faint global opacity so it actually shows.
-    { src: '/designs/bio/flame.webp',              anchor: '.form', at: 0.5, offset: -600,
-      x: 11, h: 360, depth: 0.14, rot: 0, grow: 0, out: 0, op: 0.55, pshift: 0.35 },
+    // B5 — radial kolam on the LEFT, reading through the enquiry glass,
+    // exactly where the flame background used to sit. Same parallax feel
+    // (pshift 0.35). The flame itself now lives inside the panel under the
+    // send button. lag stays out of it — pshift keeps it beside the form.
+    { src: '/designs/enquiry/radial-star.webp',    anchor: '.form', at: 0.5, offset: -600,
+      x: 11, h: 340, depth: 0.14, rot: 0, grow: 0, out: 0, op: 0.45, pshift: 0.35 },
 
     // B6 — no rotation, moved up the page
     { src: '/designs/enquiry/dotted-diamond.webp', anchor: '#enquiry', at: 0, offset: -340,
@@ -87,12 +87,65 @@ let nodes = [];
 let clipLayers = [];
 let lastScroll = 0;
 
+// Three sizing tiers, because motifs are sized in vw and vw scales
+// linearly with the viewport — so a width that reads well on desktop
+// goes tiny on a phone. Each motif may carry per-tier overrides that
+// cascade down: phone falls back to tablet, tablet to the desktop base.
+//   phone  (<=560px)      -> suffix 'M'  (wM, hM, offsetM, xM …)
+//   tablet (561–1024px)   -> suffix 'T'  (wT, hT, offsetT, xT …)
+//   desktop (>1024px)     -> the bare key
+const phone = () => window.matchMedia('(max-width:560px)').matches;
+const tablet = () => window.matchMedia('(min-width:561px) and (max-width:1024px)').matches;
+const pick = (n, key) => {
+  if (phone() && n[key + 'M'] != null) return n[key + 'M'];
+  if ((phone() || tablet()) && n[key + 'T'] != null) return n[key + 'T'];
+  return n[key];
+};
+
 function style(n) {
   // `op` overrides the global-derived opacity for a motif that needs
   // to read strongly (e.g. behind a glass panel).
   const o = n.op ?? DESIGNS.opacity * (1.25 - n.depth * 0.5);
   n.el.style.opacity = String(o);
   n.el.style.filter = `blur(${(DESIGNS.maxBlur * n.depth).toFixed(2)}px)`;
+}
+
+/** Visual width of an element's text — the bounding box of its rendered
+   content, so a wrapped line returns the width of its longest line. This
+   is what lets a motif track the actual inked width of a heading rather
+   than the paragraph box it sits in. */
+function textWidth(sel) {
+  const el = document.querySelector(sel);
+  if (!el) return 0;
+  const range = document.createRange();
+  range.selectNodeContents(el);
+  return range.getBoundingClientRect().width;
+}
+
+/** Size and horizontal position, re-applied on breakpoint change and on
+   any reflow (so `matchWidth` keeps tracking after fonts load / resize). */
+function sizeAndPlace(n) {
+  n.el.style.left = `${pick(n, 'x')}%`;
+
+  // Tie the motif's width to a piece of text, so it scales with the
+  // type instead of the raw viewport — consistent on phone/tablet/desktop.
+  if (n.matchWidth) {
+    const w = textWidth(n.matchWidth);
+    if (w) {
+      n.el.style.height = '';
+      n.el.style.width = `${(w * (n.matchScale || 1)).toFixed(1)}px`;
+      return;
+    }
+  }
+
+  const h = pick(n, 'h');
+  if (h) {
+    n.el.style.height = `${h}px`;
+    n.el.style.width = 'auto';
+  } else {
+    n.el.style.height = '';
+    n.el.style.width = `${pick(n, 'w')}vw`;
+  }
 }
 
 /** Resolve each motif's document-space Y from its anchor section. */
@@ -105,7 +158,7 @@ function measure() {
       continue;
     }
     const r = host.getBoundingClientRect();
-    n.yPx = r.top + scroll + r.height * n.at + (n.offset || 0);
+    n.yPx = r.top + scroll + r.height * n.at + (pick(n, 'offset') || 0);
   }
 }
 
@@ -126,19 +179,13 @@ export function initDesigns(container, clipContainer) {
     img.draggable = false;
     img.fetchPriority = 'low';
     img.decoding = 'async';
-    img.style.left = `${p.x}%`;
-    if (p.h) {
-      img.style.height = `${p.h}px`;
-      img.style.width = 'auto';
-    } else {
-      img.style.width = `${p.w}vw`;
-    }
 
     const host = (p.clip || p.clipAbove) && clipContainer ? clipContainer : container;
     host.appendChild(img);
 
     const node = { el: img, yPx: 0, ...p };
     style(node);
+    sizeAndPlace(node);
     return node;
   });
 
@@ -153,16 +200,26 @@ export function initDesigns(container, clipContainer) {
     }
   }
 
+  nodes.forEach(sizeAndPlace);     // once fonts/layout settle, resize to text
   measure();
   updateDesigns(window.scrollY || 0);
 
   const ro = new ResizeObserver(() => {
+    nodes.forEach(sizeAndPlace);   // keep matchWidth motifs tracking the text
     measure();
     updateDesigns(lastScroll);
   });
   ro.observe(document.body);
+  // observe every matched text element, so a motif re-fits the moment its
+  // target reflows (font swap, wrap change) even if the body height doesn't
+  nodes.forEach((n) => {
+    if (!n.matchWidth) return;
+    const el = document.querySelector(n.matchWidth);
+    if (el) ro.observe(el);
+  });
 
   window.addEventListener('resize', () => {
+    nodes.forEach(sizeAndPlace);   // re-apply breakpoint + matchWidth sizes
     measure();
     updateDesigns(lastScroll);
   });

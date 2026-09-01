@@ -7,6 +7,7 @@ import { initBackground, setBackgroundScroll, MIST, applyMist } from './backgrou
 import { initGrain, refreshGrain, GRAIN } from './grain.js';
 import { initDesigns, updateDesigns, applyDesigns, DESIGNS } from './designs.js';
 import { initGallery } from './gallery.js';
+import { runInkLoader } from './loader.js';
 
 /* --- smooth scroll -------------------------------------------- */
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -49,6 +50,7 @@ requestAnimationFrame(raf);
 const layers = [...document.querySelectorAll('[data-depth]')].map((el) => ({
   el,
   depth: parseFloat(el.dataset.depth) || 0,
+  axis: el.dataset.axis === 'x' ? 'x' : 'y',   // 'x' = drift right on scroll
   base: '',
   centre: 0,
 }));
@@ -70,7 +72,15 @@ function parallax(scrollY) {
     // distance from the viewport's centre, in viewport space
     const centre = l.centre - scrollY - vh / 2;
     const shift = -centre * l.depth;
-    l.el.style.transform = `${l.base}translate3d(0, ${shift.toFixed(2)}px, 0)`;
+    if (l.axis === 'x') {
+      // horizontal drift, clamped so it only ever moves to the RIGHT of
+      // its resting spot — it sits still until it passes the viewport
+      // centre, then eases rightward as you keep scrolling down.
+      const x = Math.max(0, shift);
+      l.el.style.transform = `${l.base}translate3d(${x.toFixed(2)}px, 0, 0)`;
+    } else {
+      l.el.style.transform = `${l.base}translate3d(0, ${shift.toFixed(2)}px, 0)`;
+    }
   }
 }
 
@@ -139,21 +149,22 @@ initGallery();
 
 /* Hold the loader until fonts and the first images are ready, then
    fade — the "chill" entrance, with a floor so it never flashes. */
-const started = performance.now();
 const loader = document.getElementById('loader');
 
+// Start poking the logo in immediately, and hold the loader until BOTH
+// the ink animation and the page assets are ready.
+const inkDone = runInkLoader(loader, `${import.meta.env.BASE_URL}logo/goldy-mark.png`);
+
 Promise.all([
+  inkDone,
   document.fonts ? document.fonts.ready : Promise.resolve(),
   new Promise((r) => (document.readyState === 'complete' ? r() : window.addEventListener('load', r))),
 ]).then(() => {
-  const wait = Math.max(0, 900 - (performance.now() - started));
-  setTimeout(() => {
-    loader?.classList.add('is-done');
-    document.body.classList.add('is-ready');
-    measureLayers();
-    parallax(window.scrollY || 0);
-    updateDesigns(window.scrollY || 0);
-  }, wait);
+  loader?.classList.add('is-done');
+  document.body.classList.add('is-ready');
+  measureLayers();
+  parallax(window.scrollY || 0);
+  updateDesigns(window.scrollY || 0);
 });
 
 const yearEl = document.getElementById('year');
