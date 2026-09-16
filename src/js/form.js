@@ -100,9 +100,11 @@ if (form) {
       name: form.name.value.trim(),
       email: form.email.value.trim(),
       phone: form.phone.value.trim() || '—',
+      location: form.location.value.trim() || '—',
       enquiry: form.enquiry.value,
       placement: form.placement.value.trim() || '—',
       size: form.size.value.trim() || '—',
+      preferred_date: form.preferred_date.value.trim() || '—',
       design: form.design.value.trim() || '—',
       heard: form.heard.value.trim() || '—',
     };
