@@ -92,33 +92,45 @@ if (form) {
     submit.disabled = true;
     submit.textContent = 'Sending…';
 
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+
+    // FormSubmit field conventions: keys become the labels in the email,
+    // and _-prefixed keys are its control fields.
     const payload = {
-      access_key: CONFIG.formAccessKey,
-      subject: `Tattoo enquiry — ${form.name.value.trim()}`,
-      from_name: 'Goldy Handpoked website',
-      replyto: form.email.value.trim(),
-      name: form.name.value.trim(),
-      email: form.email.value.trim(),
-      phone: form.phone.value.trim() || '—',
-      location: form.location.value.trim() || '—',
-      enquiry: form.enquiry.value,
-      placement: form.placement.value.trim() || '—',
-      size: form.size.value.trim() || '—',
-      preferred_date: form.preferred_date.value.trim() || '—',
-      design: form.design.value.trim() || '—',
-      heard: form.heard.value.trim() || '—',
+      _subject: `Tattoo enquiry — ${name}`,
+      _template: 'table',
+      _captcha: 'false',
+      _replyto: email,
+      _autoresponse:
+        "Kia ora, thank you for your enquiry — it's come through to Goldy. " +
+        'She reads every message herself and will reply personally within the week. ' +
+        "If you have any reference images, or anything that captures the feeling you're " +
+        'after, just reply to this email with them. Everything is poked by hand, one ' +
+        'client at a time, so things move at a gentle pace — thank you for your patience.\n\n' +
+        'Ngā mihi,\nGoldy — Hāwea Flat, Wanaka',
+      Name: name,
+      Email: email,
+      Phone: form.phone.value.trim() || '—',
+      'Enquiring from': form.location.value.trim() || '—',
+      'Flash or custom': form.enquiry.value,
+      Placement: form.placement.value.trim() || '—',
+      Size: form.size.value.trim() || '—',
+      'Preferred date': form.preferred_date.value.trim() || '—',
+      Design: form.design.value.trim() || '—',
+      'Heard via': form.heard.value.trim() || '—',
     };
 
     try {
-      if (!CONFIG.formAccessKey) throw new Error('no-key');
-
       const res = await fetch(CONFIG.formEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(payload),
       });
-      const data = await res.json();
-      if (!data.success) throw new Error(data.message || 'send-failed');
+      const data = await res.json().catch(() => ({}));
+      // FormSubmit returns success as boolean true or the string "true"
+      const ok = res.ok && (data.success === true || data.success === 'true');
+      if (!ok) throw new Error(data.message || 'send-failed');
 
       form.hidden = true;
       success.hidden = false;
@@ -128,9 +140,7 @@ if (form) {
       submit.textContent = 'Send enquiry';
       note.classList.add('is-error');
       note.textContent =
-        err.message === 'no-key'
-          ? 'Form not connected yet — add the Web3Forms key in src/js/config.js.'
-          : 'That did not send. Please try again, or email handpoked.ttt@gmail.com directly.';
+        'That did not send. Please try again, or email handpoked.ttt@gmail.com directly.';
     }
   });
 }

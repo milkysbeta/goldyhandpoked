@@ -28,11 +28,12 @@ let gridEl, moreEl, lbEl, lbImg, lbMeta, lbClose;
 /* --- quiet preloading ----------------------------------------- */
 const warmed = new Set();
 
-function warm(url) {
+function warm(url, priority = 'low') {
   if (!url || warmed.has(url)) return;
   warmed.add(url);
   const img = new Image();
   img.decoding = 'async';
+  img.fetchPriority = priority;   // background fulls stay out of the way
   img.src = rebase(url);
 }
 
@@ -99,6 +100,10 @@ function open(i) {
   const it = items[i];
   if (!it) return;
 
+  // the selected image jumps the queue: high priority so it loads first,
+  // ahead of any background full-size warming still in flight
+  warmed.delete(it.full);
+  lbImg.fetchPriority = 'high';
   lbImg.src = rebase(it.full || it.thumb);
   lbImg.alt = it.alt || 'Hand poked tattoo by Goldy';
   lbMeta.textContent = it.caption || '';
@@ -109,6 +114,7 @@ function open(i) {
   document.body.style.overflow = 'hidden';
   lbClose.focus({ preventScroll: true });
 
+  // then quietly pre-warm the neighbours for instant arrow-key stepping
   warm(items[i + 1]?.full);
   warm(items[i - 1]?.full);
 }

@@ -1,18 +1,24 @@
 /* ---------------------------------------------------------------
    Site configuration.
 
-   formAccessKey: get a free key at https://web3forms.com — enter
-   handpoked.ttt@gmail.com, and the key arrives by email. It is a
-   public key by design; it only ever delivers to that one address,
-   so it is safe to commit.
+   The enquiry form is delivered by FormSubmit (formsubmit.co) — no
+   account and no API key. Enquiries are emailed to enquiryEmail.
 
-   The auto-reply is configured in the Web3Forms dashboard, not here.
-   Draft copy for it lives in docs/auto-reply.md.
+   ACTIVATION (one time): the first submission triggers a confirmation
+   email to enquiryEmail — open it and click "Activate Form". After that
+   every enquiry is delivered automatically.
+
+   Optional, to hide the address from the page source: after activating,
+   FormSubmit emails a random alias endpoint like
+   https://formsubmit.co/ajax/abcd1234… — paste it into formEndpoint to
+   replace the plain-email endpoint below.
+
+   The auto-reply sent back to the enquirer lives in src/js/form.js
+   (the `_autoresponse` field).
 --------------------------------------------------------------- */
 
 export const CONFIG = {
-  formEndpoint: 'https://api.web3forms.com/submit',
-  formAccessKey: '',              // ← paste key here
   enquiryEmail: 'handpoked.ttt@gmail.com',
+  formEndpoint: 'https://formsubmit.co/ajax/handpoked.ttt@gmail.com',
   instagram: 'https://www.instagram.com/goldy_handpoked/',
 };

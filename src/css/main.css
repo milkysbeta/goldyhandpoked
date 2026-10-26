@@ -219,7 +219,7 @@ body.is-leaving{opacity:0}
   object-fit:cover;object-position:center bottom;
   opacity:1;
 }
-.bio__text{padding:clamp(26px,3.4vw,52px);max-width:52ch;align-self:center}
+.bio__text{padding:clamp(26px,3.4vw,52px);max-width:72ch;align-self:center}
 
 /* Goldy's mark, sitting in the panel's bottom-right corner */
 .bio__mark{

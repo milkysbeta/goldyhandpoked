@@ -66,7 +66,7 @@ const PLACEMENTS = {
     // (pshift 0.35). The flame itself now lives inside the panel under the
     // send button. lag stays out of it — pshift keeps it beside the form.
     { src: '/designs/enquiry/radial-star.webp',    anchor: '.form', at: 0.5, offset: -600,
-      x: 11, h: 340, depth: 0.14, rot: 0, grow: 0, out: 0, op: 0.45, pshift: 0.35 },
+      x: 11, h: 340, depth: 0.7, rot: 0, grow: 0, out: 0, op: 0.45, pshift: 0.35 },
 
     // B6 — no rotation, moved up the page
     { src: '/designs/enquiry/dotted-diamond.webp', anchor: '#enquiry', at: 0, offset: -340,
